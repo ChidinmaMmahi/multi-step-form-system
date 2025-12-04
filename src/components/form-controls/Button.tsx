@@ -21,10 +21,12 @@ export const Button = ({
   return (
     <button
       className={clsx(
-        "text-white w-full p-2.5 rounded-lg",
-        variant === "primary" && "bg-primary",
-        variant === "secondary" && "",
-        variant === "disabled" && "opacity-30 bg-primary cursor-not-allowed",
+        "w-full p-2.5 rounded-lg",
+        variant === "primary" && "bg-primary text-base cursor-pointer",
+        variant === "secondary" &&
+          "border border-base-100 text-primary cursor-pointer",
+        variant === "disabled" &&
+          "opacity-30 text-base bg-primary cursor-not-allowed",
         extraClassName
       )}
       onClick={onClick}
