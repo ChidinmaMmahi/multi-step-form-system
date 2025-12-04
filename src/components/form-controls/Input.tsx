@@ -1,13 +1,15 @@
 type InputProps = {
   shape?: "input" | "select";
-  type?: "text" | "number" | "mail";
-  value?: "string";
+  label: string;
+  type?: "text" | "number" | "email";
+  value?: string;
   placeholder?: string;
   extraClassName?: string;
-  onChange?: () => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const Input = ({
+export const Input = ({
+  label,
   type,
   placeholder,
   value,
@@ -15,14 +17,16 @@ const Input = ({
   onChange,
 }: InputProps) => {
   return (
-    <input
-      type={type || "text"}
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-      className={`${extraClassName}`}
-    />
+    <label className="text-secondary text-sm font-medium">
+      {label}
+      <input
+        type={type || "text"}
+        placeholder={placeholder}
+        value={value}
+        required
+        onChange={onChange}
+        className={`border border-secondary-100 w-full rounded-md p-2 focus:outline-none focus:border-primary-100 placeholder:text-xs ${extraClassName}`}
+      />
+    </label>
   );
 };
-
-export default Input;

@@ -12,7 +12,7 @@ export interface FormData {
 
   otp: string;
 
-  carsNumber: string;
+  cardNumber: string;
   expiryDate: string;
   cvv: string;
 }
@@ -31,7 +31,7 @@ export const useFormStore = create<{
     city: "",
     state: "",
     otp: "",
-    carsNumber: "",
+    cardNumber: "",
     expiryDate: "",
     cvv: "",
   },
@@ -48,7 +48,7 @@ export const useFormStore = create<{
         city: "",
         state: "",
         otp: "",
-        carsNumber: "",
+        cardNumber: "",
         expiryDate: "",
         cvv: "",
       },
