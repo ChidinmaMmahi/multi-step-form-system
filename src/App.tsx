@@ -1,5 +1,11 @@
+import { StepsContainer } from "./steps";
+
 function App() {
-  return <div>Hello Worldsssss</div>;
+  return (
+    <div className="">
+      <StepsContainer />
+    </div>
+  );
 }
 
 export default App;

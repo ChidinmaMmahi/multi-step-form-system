@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import clsx from "clsx";
 
 type ButtonProps = {
   text: string;
@@ -6,24 +7,27 @@ type ButtonProps = {
   startIcon?: ReactNode;
   endIcon?: ReactNode;
   extraClassName?: string;
+  onClick?: () => void;
 };
 
-const Button = ({
+export const Button = ({
   text,
-  variant,
+  variant = "primary",
   startIcon,
   endIcon,
   extraClassName,
+  onClick,
 }: ButtonProps) => {
   return (
     <button
-      className={`${
-        variant === "primary"
-          ? ""
-          : variant === "secondary"
-          ? ""
-          : variant === "disabled" && ""
-      }${extraClassName}`}
+      className={clsx(
+        "text-white w-full p-2.5 rounded-lg",
+        variant === "primary" && "bg-primary",
+        variant === "secondary" && "",
+        variant === "disabled" && "opacity-30 bg-primary cursor-not-allowed",
+        extraClassName
+      )}
+      onClick={onClick}
     >
       {startIcon}
       {text}
@@ -31,5 +35,3 @@ const Button = ({
     </button>
   );
 };
-
-export default Button;
