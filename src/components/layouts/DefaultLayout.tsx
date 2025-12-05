@@ -25,17 +25,14 @@ export const DefaultLayout = ({
       <section className="sm:w-1/2">
         <Stepper />
       </section>
-      <section
-        className={clsx(
-          "flex flex-col items-end gap-y-5",
-          isMobile && "flex-1"
-        )}
-      >
-        <ThemeSwitch />
+      <section className={clsx("sm:w-1/2 space-y-5", isMobile && "flex-1")}>
+        <div className="flex justify-end ">
+          <ThemeSwitch />
+        </div>
         <section
           className={clsx(
             "bg-base dark:bg-d-base",
-            !isMobile && "rounded-lg shadow-lg p-4 lg:p-10",
+            !isMobile && "w-full rounded-lg shadow-lg p-4 lg:p-10",
             isMobile && "flex-1 p-8 pt-0"
           )}
         >
