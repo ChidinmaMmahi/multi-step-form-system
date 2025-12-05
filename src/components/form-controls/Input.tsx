@@ -17,7 +17,7 @@ export const Input = ({
   onChange,
 }: InputProps) => {
   return (
-    <label className="text-secondary text-sm font-medium">
+    <label className="text-secondary dark:text-d-secondary text-sm font-medium">
       {label}
       <input
         type={type || "text"}
@@ -25,7 +25,7 @@ export const Input = ({
         value={value}
         required
         onChange={onChange}
-        className={`border border-secondary-100 w-full rounded-md p-2 focus:outline-none focus:border-primary-100 placeholder:text-xs ${extraClassName}`}
+        className={`border border-secondary-100 dark:border-d-secondary-100 w-full rounded-md p-2 focus:outline-none focus:border-primary-100 placeholder:text-xs ${extraClassName}`}
       />
     </label>
   );

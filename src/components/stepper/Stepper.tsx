@@ -31,9 +31,11 @@ export const Stepper = () => {
   const totalSteps = useStepStore((state) => state.totalSteps);
 
   return isMobile ? (
-    <section className="bg-base flex justify-between items-center px-8 py-4 border-b border-base-100">
+    <section className="flex justify-between items-center px-8 py-4 border-b border-base-100">
       <IoIosArrowBack onClick={prevStep} className="text-3xl text-secondary" />
-      <h1 className="font-semibold text-secondary">Multi Step Form</h1>
+      <h1 className="font-semibold text-secondary dark:text-d-secondary">
+        Multi Step Form
+      </h1>
       <div className="text-secondary-100 text-sm bg-base-100 size-14 flex justify-center items-center rounded-full border-5 border-primary-100">
         <span className="text-[18px] text-primary-100 font-bold">
           {currentStep}
@@ -43,7 +45,7 @@ export const Stepper = () => {
     </section>
   ) : (
     <section className="space-y-10">
-      <div>
+      <div className="text-secondary dark:text-d-secondary">
         <h1 className="text-xl md:text-4xl font-bold">Multi Step Form</h1>
         <p className="hidden lg:block">
           This is a sample to show i can mimic how a multi step form works
@@ -58,14 +60,19 @@ export const Stepper = () => {
             <div className="flex items-center gap-x-3">
               <div
                 className={clsx(
-                  "border border-primary-100 text-primary text-sm size-10 flex justify-center items-center rounded-full",
-                  isCompleted && "bg-primary text-white border-none",
-                  isActive && "bg-primary text-white border-none"
+                  "border border-primary-100 text-sm size-10 flex justify-center items-center rounded-full",
+                  !isCompleted &&
+                    !isActive &&
+                    "text-primary dark:text-d-primary",
+                  isCompleted &&
+                    "bg-primary dark:bg-d-primary text-base dark:text-d-base border-none",
+                  isActive &&
+                    "bg-primary dark:bg-d-primary text-base dark:text-d-base border-none"
                 )}
               >
                 {isCompleted ? <IoCheckmark /> : details.step}
               </div>
-              <div className="text-sm">
+              <div className="text-sm text-secondary dark:text-d-secondary">
                 <p className="text-xs">Step {details.step}</p>
                 <p>{details.title}</p>
               </div>
