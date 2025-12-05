@@ -19,8 +19,12 @@ export const FormLayout = ({
   return (
     <form className="space-y-10">
       <div className="space-y-1">
-        <legend className="text-primary text-2xl font-semibold">{title}</legend>
-        <p className="text-sm text-secondary">{subtitle}</p>
+        <legend className="text-primary dark:text-d-primary text-2xl font-semibold">
+          {title}
+        </legend>
+        <p className="text-sm text-secondary dark:text-d-secondary">
+          {subtitle}
+        </p>
       </div>
       <section>{children}</section>
       <div className="flex gap-x-2">

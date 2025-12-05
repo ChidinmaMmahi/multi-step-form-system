@@ -1,7 +1,9 @@
-import { FormLayout, Stepper } from "./index";
+import { FormLayout } from "./index";
+import { Stepper } from "../stepper";
 import type { FormLayoutProps } from "./models/FormLayoutProps";
 import { useIsScreen } from "../../hooks";
 import clsx from "clsx";
+import { ThemeSwitch } from "../ThemeSwitch";
 
 export const DefaultLayout = ({
   title,
@@ -14,10 +16,10 @@ export const DefaultLayout = ({
   return (
     <div
       className={clsx(
-        "bg-base-100 flex",
+        "flex",
         !isMobile &&
-          "py-20 sm:px-5 sm: space-x-5 lg:px-20 xl:px-28 justify-between lg:space-x-10 xl:space-x-20",
-        isMobile && "min-h-screen flex-col bg-base"
+          "bg-base-100 dark:bg-d-base-100 py-20 sm:px-5 sm: space-x-5 lg:px-20 xl:px-28 justify-between lg:space-x-10 xl:space-x-20",
+        isMobile && "min-h-screen flex-col bg-base dark:bg-d-base"
       )}
     >
       <section className="sm:w-1/2">
@@ -25,18 +27,26 @@ export const DefaultLayout = ({
       </section>
       <section
         className={clsx(
-          "bg-base",
-          !isMobile && "w-1/2 rounded-lg shadow-lg p-4 lg:p-10",
-          isMobile && "flex-1 p-8"
+          "flex flex-col items-end gap-y-5",
+          isMobile && "flex-1"
         )}
       >
-        <FormLayout
-          title={title}
-          subtitle={subtitle}
-          buttonDisabled={buttonDisabled}
+        <ThemeSwitch />
+        <section
+          className={clsx(
+            "bg-base dark:bg-d-base",
+            !isMobile && "rounded-lg shadow-lg p-4 lg:p-10",
+            isMobile && "flex-1 p-8 pt-0"
+          )}
         >
-          {children}
-        </FormLayout>
+          <FormLayout
+            title={title}
+            subtitle={subtitle}
+            buttonDisabled={buttonDisabled}
+          >
+            {children}
+          </FormLayout>
+        </section>
       </section>
     </div>
   );

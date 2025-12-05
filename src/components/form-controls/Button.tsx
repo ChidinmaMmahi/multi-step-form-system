@@ -22,11 +22,12 @@ export const Button = ({
     <button
       className={clsx(
         "w-full p-2.5 rounded-lg",
-        variant === "primary" && "bg-primary text-base cursor-pointer",
+        variant === "primary" &&
+          "bg-primary dark:bg-d-primary text-base cursor-pointer",
         variant === "secondary" &&
           "border border-base-100 text-primary cursor-pointer",
         variant === "disabled" &&
-          "opacity-30 text-base bg-primary cursor-not-allowed",
+          "opacity-30 text-base bg-primary dark:bg-d-primary cursor-not-allowed",
         extraClassName
       )}
       onClick={onClick}
