@@ -19,7 +19,7 @@ export const useStepStore = create<StepStore>()(
   persist<StepStore>(
     (set, get) => ({
       currentStep: 1,
-      totalSteps: 4,
+      totalSteps: 5,
       completedSteps: [],
 
       markCompleted: (step) => {

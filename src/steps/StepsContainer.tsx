@@ -1,15 +1,29 @@
 import { useStepStore } from "../store/stepStore";
-import { PersonalInfo, Address, Payment, Verification } from "./index";
+import {
+  AccountSetup,
+  ProfileInfo,
+  ContactDetails,
+  Verification,
+  Summary,
+} from "./index";
 
 export const StepsContainer = () => {
   const currentStep = useStepStore((state) => state.currentStep);
 
   return (
     <div>
-      {currentStep === 1 && <PersonalInfo />}
-      {currentStep === 2 && <Address />}
-      {currentStep === 3 && <Payment />}
+      {currentStep === 1 && <AccountSetup />}
+      {currentStep === 2 && <ProfileInfo />}
+      {currentStep === 3 && <ContactDetails />}
       {currentStep === 4 && <Verification />}
+      {currentStep === 5 && <Summary />}
     </div>
+    // <div>
+    //   {currentStep === 1 && <AccountSetup />}
+    //   {currentStep === 2 && <ProfileInfo />}
+    //   {currentStep === 3 && <ContactDetails />}
+    //   {currentStep === 4 && <Verification />}
+    //   {currentStep === 5 && <Summary />}
+    // </div>
   );
 };

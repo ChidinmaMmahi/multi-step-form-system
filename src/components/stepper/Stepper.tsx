@@ -3,25 +3,7 @@ import { useStepStore } from "../../store";
 import { IoCheckmark } from "react-icons/io5";
 import { IoIosArrowBack } from "react-icons/io";
 import clsx from "clsx";
-
-const stepDetails = [
-  {
-    step: 1,
-    title: "Personal Information",
-  },
-  {
-    step: 2,
-    title: " Address",
-  },
-  {
-    step: 3,
-    title: " Verification",
-  },
-  {
-    step: 4,
-    title: "Card Number",
-  },
-];
+import { stepDetails } from "./step-details";
 
 export const Stepper = () => {
   const isMobile = useIsScreen();
@@ -32,10 +14,8 @@ export const Stepper = () => {
 
   return isMobile ? (
     <section className="flex justify-between items-center px-8 py-4 border-b border-base-100">
-      <IoIosArrowBack onClick={prevStep} className="text-3xl text-secondary" />
-      <h1 className="font-semibold text-secondary dark:text-d-secondary">
-        Multi Step Form
-      </h1>
+      <IoIosArrowBack onClick={prevStep} className="text-3xl" />
+      <h1 className="font-semibold">Multi Step Form</h1>
       <div className="text-secondary-100 text-sm bg-base-100 size-14 flex justify-center items-center rounded-full border-5 border-primary-100">
         <span className="text-[18px] text-primary-100 font-bold">
           {currentStep}
@@ -45,7 +25,7 @@ export const Stepper = () => {
     </section>
   ) : (
     <section className="space-y-10">
-      <div className="text-secondary dark:text-d-secondary">
+      <div>
         <h1 className="text-xl md:text-4xl font-bold">Multi Step Form</h1>
         <p className="hidden lg:block">
           This is a sample to show i can mimic how a multi step form works
@@ -72,7 +52,7 @@ export const Stepper = () => {
               >
                 {isCompleted ? <IoCheckmark /> : details.step}
               </div>
-              <div className="text-sm text-secondary dark:text-d-secondary">
+              <div className="text-sm">
                 <p className="text-xs">Step {details.step}</p>
                 <p>{details.title}</p>
               </div>

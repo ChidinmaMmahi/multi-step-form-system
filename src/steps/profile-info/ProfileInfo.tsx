@@ -1,14 +1,19 @@
 import { Input, DefaultLayout } from "../../components";
-import { useFormStore } from "../../store/formStore";
+import { useFormStore } from "../../store";
 
-export const Payment = () => {
+export const ProfileInfo = () => {
   const { data, update } = useFormStore();
 
-  const isComplete = !!(data.firstName && data.lastName && data.email);
+  const isComplete = !!(
+    data.firstName &&
+    data.lastName &&
+    data.gender &&
+    data.dob
+  );
 
   return (
     <DefaultLayout
-      title="Payment"
+      title="Profile Information"
       subtitle="Please provide your name, email address and phone number"
       buttonDisabled={!isComplete}
     >
@@ -26,18 +31,19 @@ export const Payment = () => {
           onChange={(e) => update("lastName", e.target.value)}
         />
         <Input
-          label="Email Address"
-          placeholder="Enter your email address"
-          value={data.email}
-          type="email"
-          onChange={(e) => update("email", e.target.value)}
+          label="Gender"
+          fieldType="radio"
+          options={["Male", "Female", "Other"]}
+          value={data.gender}
+          onChange={(e) =>
+            update("gender", e.target.value as "male" | "female" | "other")
+          }
         />
         <Input
-          label="Email Address"
-          placeholder="Enter your email address"
-          value={data.email}
-          type="email"
-          onChange={(e) => update("email", e.target.value)}
+          label="Date of Birth"
+          value={data.dob}
+          type="date"
+          onChange={(e) => update("dob", e.target.value)}
         />
       </div>
     </DefaultLayout>
