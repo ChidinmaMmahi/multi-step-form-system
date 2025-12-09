@@ -22,9 +22,7 @@ export const FormLayout = ({
         <legend className="text-primary dark:text-d-primary text-2xl font-semibold">
           {title}
         </legend>
-        <p className="text-sm text-secondary dark:text-d-secondary">
-          {subtitle}
-        </p>
+        <p className="text-sm">{subtitle}</p>
       </div>
       <section>{children}</section>
       <div className="flex gap-x-2">
@@ -32,8 +30,8 @@ export const FormLayout = ({
           <Button onClick={prevStep} text="Back" variant="secondary" />
         )}
         <Button
+          disabled={buttonDisabled}
           text={currentStep === totalSteps ? "Submit" : "Next"}
-          variant={buttonDisabled ? "disabled" : "primary"}
           onClick={nextStep}
         />
       </div>

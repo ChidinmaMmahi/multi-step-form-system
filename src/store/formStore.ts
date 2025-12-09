@@ -3,13 +3,21 @@ import { persist } from "zustand/middleware";
 import type { PersistOptions } from "zustand/middleware";
 
 export interface FormData {
+  email: string;
+  password: string;
+  confirmPassword: string;
+
   firstName: string;
   lastName: string;
-  email: string;
+  gender: "" | "male" | "female" | "other";
+  dob: string;
+
   phone: string;
   address: string;
   city: string;
   state: string;
+  country: string;
+
   otp: string;
   cardNumber: string;
   expiryDate: string;
@@ -28,13 +36,21 @@ export const useFormStore = create<FormStore>()(
   persist<FormStore>(
     (set) => ({
       data: {
+        email: "",
+        password: "",
+        confirmPassword: "",
+
         firstName: "",
         lastName: "",
-        email: "",
+        gender: "",
+        dob: "",
+
         phone: "",
         address: "",
         city: "",
         state: "",
+        country: "",
+
         otp: "",
         cardNumber: "",
         expiryDate: "",
@@ -52,13 +68,21 @@ export const useFormStore = create<FormStore>()(
       reset: () =>
         set({
           data: {
+            email: "",
+            password: "",
+            confirmPassword: "",
+
             firstName: "",
             lastName: "",
-            email: "",
+            gender: "",
+            dob: "",
+
             phone: "",
             address: "",
             city: "",
             state: "",
+            country: "",
+
             otp: "",
             cardNumber: "",
             expiryDate: "",

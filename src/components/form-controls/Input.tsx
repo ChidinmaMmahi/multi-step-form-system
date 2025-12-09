@@ -1,7 +1,8 @@
 type InputProps = {
-  shape?: "input" | "select";
+  fieldType?: "input" | "select" | "radio";
+  options?: string[];
   label: string;
-  type?: "text" | "number" | "email";
+  type?: "text" | "number" | "email" | "password" | "date" | "tel";
   value?: string;
   placeholder?: string;
   extraClassName?: string;
@@ -9,6 +10,8 @@ type InputProps = {
 };
 
 export const Input = ({
+  fieldType,
+  options,
   label,
   type,
   placeholder,
@@ -16,8 +19,29 @@ export const Input = ({
   extraClassName,
   onChange,
 }: InputProps) => {
-  return (
-    <label className="text-secondary dark:text-d-secondary text-sm font-medium">
+  const baseClass =
+    "border border-secondary-100 dark:border-d-secondary-100 w-full rounded-md p-2";
+
+  return fieldType === "radio" ? (
+    <span className="text-sm font-medium">
+      {label}
+      <div className={`${baseClass} space-y-1`}>
+        {options?.map((option) => (
+          <label key={option} className="flex items-center gap-x-1">
+            <input
+              type="radio"
+              value={option}
+              name="gender"
+              checked={value === option}
+              onChange={onChange}
+            />
+            {option}
+          </label>
+        ))}
+      </div>
+    </span>
+  ) : (
+    <label className="text-sm font-medium">
       {label}
       <input
         type={type || "text"}
@@ -25,7 +49,7 @@ export const Input = ({
         value={value}
         required
         onChange={onChange}
-        className={`border border-secondary-100 dark:border-d-secondary-100 w-full rounded-md p-2 focus:outline-none focus:border-primary-100 placeholder:text-xs ${extraClassName}`}
+        className={`${baseClass} focus:outline-none focus:border-primary-100 placeholder:text-xs ${extraClassName}`}
       />
     </label>
   );
