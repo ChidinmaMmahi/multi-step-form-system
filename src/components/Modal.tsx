@@ -63,7 +63,7 @@ export const Modal = ({
         ) : (
           type === "success" && (
             <div className="bg-green-100 inline-flex p-3 rounded-full">
-              <LuBadgeCheck className="text-2xl text-green-700" />
+              <LuBadgeCheck className="text-2xl text-primary" />
             </div>
           )
         )}

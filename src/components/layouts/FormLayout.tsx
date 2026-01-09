@@ -1,9 +1,7 @@
 import { Button } from "../form-controls";
 import type { FormLayoutProps } from "./models/FormLayoutProps";
-import { useFormStore, useStepStore } from "../../store";
+import { useStepStore } from "../../store";
 import { useIsScreen, useStepNavigation } from "../../hooks";
-import { Modal } from "../Modal";
-import { useEffect, useState } from "react";
 
 export const FormLayout = ({
   title,
@@ -12,25 +10,9 @@ export const FormLayout = ({
   buttonDisabled,
 }: FormLayoutProps) => {
   const { currentStep, totalSteps } = useStepStore();
-  const { data } = useFormStore();
 
   const isMobile = useIsScreen();
   const { handlePrevSteps, handleNextSteps } = useStepNavigation();
-
-  const [showModal, setShowModal] = useState(false);
-
-  useEffect(() => {
-    if (data.isAccountSuccess) {
-      setShowModal(true);
-
-      // Set a timeout to auto-close modal after 3 seconds
-      const timer = setTimeout(() => {
-        setShowModal(false);
-      }, 1500); // 3000ms = 3 seconds
-
-      return () => clearTimeout(timer);
-    }
-  }, [data.isAccountSuccess]);
 
   return (
     <form className="space-y-10">
@@ -38,7 +20,7 @@ export const FormLayout = ({
         <legend className="text-primary dark:text-d-primary text-2xl font-semibold">
           {title}
         </legend>
-        <p className="text-sm">{subtitle}</p>
+        <p className="text-sm text-gray-800 dark:text-white">{subtitle}</p>
       </div>
       <section>{children}</section>
       <div className="flex gap-x-2">
@@ -50,13 +32,6 @@ export const FormLayout = ({
           text={currentStep === totalSteps ? "Submit" : "Next"}
           onClick={handleNextSteps}
         />
-        {currentStep === 5 && showModal && (
-          <Modal
-            title="Success"
-            content="Successful Creation, congrats"
-            type="success"
-          />
-        )}
       </div>
     </form>
   );

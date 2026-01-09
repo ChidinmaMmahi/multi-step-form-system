@@ -25,11 +25,13 @@ export const Stepper = () => {
       </div>
     </section>
   ) : (
-    <section className="space-y-10">
+    <section className="space-y-10 text-black dark:text-white">
       <div>
-        <h1 className="text-xl md:text-4xl font-bold">Multi Step Form</h1>
-        <p className="hidden lg:block">
-          This is a sample to show i can mimic how a multi step form works
+        <h1 className="text-xl md:text-4xl font-bold text-black mb-2">
+          Multi Step Form
+        </h1>
+        <p className="hidden lg:block dark:text-shadow-sm">
+          This is a sample that mimics how a multi-step form works
         </p>
       </div>
       <div className="space-y-12">
@@ -53,7 +55,7 @@ export const Stepper = () => {
               >
                 {isCompleted ? <IoCheckmark /> : details.step}
               </div>
-              <div className="text-sm">
+              <div className="text-sm dark:text-shadow-sm">
                 <p className="text-xs">Step {details.step}</p>
                 <p>{details.title}</p>
               </div>

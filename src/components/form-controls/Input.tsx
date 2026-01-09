@@ -6,6 +6,7 @@ type InputProps = {
   value?: string;
   placeholder?: string;
   extraClassName?: string;
+  error?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -17,6 +18,7 @@ export const Input = ({
   placeholder,
   value,
   extraClassName,
+  error,
   onChange,
 }: InputProps) => {
   const baseClass =
@@ -41,7 +43,7 @@ export const Input = ({
       </div>
     </span>
   ) : (
-    <label className="text-sm font-medium">
+    <label className="text-sm font-medium w-full">
       {label}
       <input
         type={type || "text"}
@@ -51,6 +53,11 @@ export const Input = ({
         onChange={onChange}
         className={`${baseClass} focus:outline-none focus:border-primary-100 placeholder:text-xs ${extraClassName}`}
       />
+      {error && (
+        <span className="block text-xs text-red-700 dark:text-red-900 mt-1">
+          {error}
+        </span>
+      )}
     </label>
   );
 };

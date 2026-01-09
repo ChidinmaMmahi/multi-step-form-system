@@ -11,6 +11,7 @@ interface StepStore {
   nextStep: () => void;
   prevStep: () => void;
   goToStep: (step: number) => void;
+  reset: () => void;
 }
 
 type PersistedStepStore = PersistOptions<StepStore, StepStore>;
@@ -50,6 +51,10 @@ export const useStepStore = create<StepStore>()(
         if (step >= 1 && step <= totalSteps) {
           set({ currentStep: step });
         }
+      },
+
+      reset: () => {
+        set({ currentStep: 1, completedSteps: [] });
       },
     }),
     {

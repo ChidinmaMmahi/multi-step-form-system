@@ -1,4 +1,5 @@
 import { useFormStore, useStepStore } from "../store";
+import { useNavigate } from "react-router-dom";
 
 export const useStepNavigation = () => {
   const {
@@ -10,6 +11,7 @@ export const useStepNavigation = () => {
     completedSteps,
   } = useStepStore();
   const { data, update } = useFormStore();
+  const navigate = useNavigate();
 
   const handleNextSteps = () => {
     if (currentStep === 3 && data.isPhoneVerified) {
@@ -24,6 +26,8 @@ export const useStepNavigation = () => {
 
     if (currentStep === totalSteps) {
       update("isAccountSuccess", true);
+      navigate("/success");
+      return;
     }
     nextStep();
   };

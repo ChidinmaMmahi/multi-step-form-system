@@ -27,7 +27,7 @@ export const Button = ({
         variant === "primary" &&
           "w-full p-2.5 rounded-lg bg-primary dark:bg-d-primary text-base cursor-pointer",
         variant === "secondary" &&
-          "w-full p-2.5 rounded-lg border border-base-100 text-primary cursor-pointer",
+          "w-full p-2.5 rounded-lg border border-black dark:border-base-100 text-primary cursor-pointer",
         variant === "link" &&
           "underline text-primary-100 cursor-pointer text-xs",
         extraClassName

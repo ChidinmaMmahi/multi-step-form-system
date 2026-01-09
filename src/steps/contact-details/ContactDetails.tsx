@@ -1,10 +1,19 @@
 import { Input, DefaultLayout } from "../../components";
 import { useFormStore } from "../../store";
+import { useState, useEffect } from "react";
+import { validatePhone } from "../../utils/validation";
 
 export const ContactDetails = () => {
   const { data, update, updatePhone } = useFormStore();
 
-  const isComplete = !!(data.phone && data.address);
+  const [error, setError] = useState<string>("");
+  const [touched, setTouched] = useState(false);
+
+  useEffect(() => {
+    setError(validatePhone(data.phone) || "");
+  }, [data.phone]);
+
+  const isComplete = !error && data.phone && data.address;
 
   return (
     <DefaultLayout
@@ -18,7 +27,12 @@ export const ContactDetails = () => {
           type="tel"
           placeholder="Enter your phone number"
           value={data.phone}
-          onChange={(e) => updatePhone(e.target.value)}
+          error={touched ? error : ""}
+          onChange={(e) => {
+            if (!touched) setTouched(true);
+            const value = e.target.value.replace(/[^0-9]/g, "").slice(0, 12);
+            updatePhone(value);
+          }}
         />
         <Input
           label="Address"
