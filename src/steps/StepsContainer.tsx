@@ -1,4 +1,5 @@
 import { useStepStore } from "../store/stepStore";
+import { useFormStore } from "../store/formStore";
 import {
   AccountSetup,
   ProfileInfo,
@@ -8,7 +9,7 @@ import {
 } from "./index";
 
 export const StepsContainer = () => {
-  const currentStep = useStepStore((state) => state.currentStep);
+  const { currentStep } = useStepStore();
 
   return (
     <div>
@@ -18,12 +19,5 @@ export const StepsContainer = () => {
       {currentStep === 4 && <Verification />}
       {currentStep === 5 && <Summary />}
     </div>
-    // <div>
-    //   {currentStep === 1 && <AccountSetup />}
-    //   {currentStep === 2 && <ProfileInfo />}
-    //   {currentStep === 3 && <ContactDetails />}
-    //   {currentStep === 4 && <Verification />}
-    //   {currentStep === 5 && <Summary />}
-    // </div>
   );
 };

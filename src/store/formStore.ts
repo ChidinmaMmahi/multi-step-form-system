@@ -19,14 +19,16 @@ export interface FormData {
   country: string;
 
   otp: string;
-  cardNumber: string;
-  expiryDate: string;
-  cvv: string;
+  generatedOtp: string;
+  isPhoneVerified: boolean;
+
+  isAccountSuccess: boolean;
 }
 
 interface FormStore {
   data: FormData;
   update: <K extends keyof FormData>(key: K, value: FormData[K]) => void;
+  updatePhone: (phone: string) => void;
   reset: () => void;
 }
 
@@ -52,9 +54,10 @@ export const useFormStore = create<FormStore>()(
         country: "",
 
         otp: "",
-        cardNumber: "",
-        expiryDate: "",
-        cvv: "",
+        generatedOtp: "",
+        isPhoneVerified: false,
+
+        isAccountSuccess: false,
       },
 
       update: (key, value) =>
@@ -62,6 +65,17 @@ export const useFormStore = create<FormStore>()(
           data: {
             ...state.data,
             [key]: value,
+          },
+        })),
+
+      updatePhone: (phone: string) =>
+        set((state) => ({
+          data: {
+            ...state.data,
+            phone,
+            otp: "",
+            generatedOtp: "",
+            isPhoneVerified: false,
           },
         })),
 
@@ -84,9 +98,10 @@ export const useFormStore = create<FormStore>()(
             country: "",
 
             otp: "",
-            cardNumber: "",
-            expiryDate: "",
-            cvv: "",
+            generatedOtp: "",
+            isPhoneVerified: false,
+
+            isAccountSuccess: false,
           },
         }),
     }),

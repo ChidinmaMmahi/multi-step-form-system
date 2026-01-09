@@ -4,11 +4,15 @@ export const useSummarizedItems = () => {
   const { data } = useFormStore();
 
   return [
-    { key: "Email", value: data.email },
-    { key: "Full name", value: data.lastName + " " + data.firstName },
-    { key: "Gender", value: data.gender },
-    { key: "Date of Birth", value: data.dob },
-    { key: "Phone number", value: data.phone },
-    { key: "Address", value: data.address },
+    { id: "email", key: "Email", value: data.email },
+    {
+      id: "fullName",
+      key: "Full name",
+      value: data.lastName + " " + data.firstName,
+    },
+    { id: "gender", key: "Gender", value: data.gender },
+    { id: "dob", key: "Date of Birth", value: data.dob },
+    { id: "phone", key: "Phone number", value: data.phone },
+    { id: "address", key: "Address", value: data.address },
   ];
 };

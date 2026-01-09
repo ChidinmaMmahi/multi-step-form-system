@@ -1,7 +1,7 @@
 type InputProps = {
   fieldType?: "input" | "select" | "radio";
   options?: string[];
-  label: string;
+  label?: string;
   type?: "text" | "number" | "email" | "password" | "date" | "tel";
   value?: string;
   placeholder?: string;
@@ -25,7 +25,7 @@ export const Input = ({
   return fieldType === "radio" ? (
     <span className="text-sm font-medium">
       {label}
-      <div className={`${baseClass} space-y-1`}>
+      <div className={`${baseClass} flex gap-x-3 flex-wrap`}>
         {options?.map((option) => (
           <label key={option} className="flex items-center gap-x-1">
             <input

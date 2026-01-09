@@ -1,7 +1,9 @@
 import { Button } from "../form-controls";
 import type { FormLayoutProps } from "./models/FormLayoutProps";
-import { useStepStore } from "../../store";
-import { useIsScreen } from "../../hooks";
+import { useFormStore, useStepStore } from "../../store";
+import { useIsScreen, useStepNavigation } from "../../hooks";
+import { Modal } from "../Modal";
+import { useEffect, useState } from "react";
 
 export const FormLayout = ({
   title,
@@ -9,12 +11,26 @@ export const FormLayout = ({
   subtitle,
   buttonDisabled,
 }: FormLayoutProps) => {
-  const nextStep = useStepStore((state) => state.nextStep);
-  const prevStep = useStepStore((state) => state.prevStep);
-  const currentStep = useStepStore((state) => state.currentStep);
-  const totalSteps = useStepStore((state) => state.totalSteps);
+  const { currentStep, totalSteps } = useStepStore();
+  const { data } = useFormStore();
 
   const isMobile = useIsScreen();
+  const { handlePrevSteps, handleNextSteps } = useStepNavigation();
+
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    if (data.isAccountSuccess) {
+      setShowModal(true);
+
+      // Set a timeout to auto-close modal after 3 seconds
+      const timer = setTimeout(() => {
+        setShowModal(false);
+      }, 1500); // 3000ms = 3 seconds
+
+      return () => clearTimeout(timer);
+    }
+  }, [data.isAccountSuccess]);
 
   return (
     <form className="space-y-10">
@@ -27,13 +43,20 @@ export const FormLayout = ({
       <section>{children}</section>
       <div className="flex gap-x-2">
         {!isMobile && currentStep !== 1 && (
-          <Button onClick={prevStep} text="Back" variant="secondary" />
+          <Button onClick={handlePrevSteps} text="Back" variant="secondary" />
         )}
         <Button
           disabled={buttonDisabled}
           text={currentStep === totalSteps ? "Submit" : "Next"}
-          onClick={nextStep}
+          onClick={handleNextSteps}
         />
+        {currentStep === 5 && showModal && (
+          <Modal
+            title="Success"
+            content="Successful Creation, congrats"
+            type="success"
+          />
+        )}
       </div>
     </form>
   );
