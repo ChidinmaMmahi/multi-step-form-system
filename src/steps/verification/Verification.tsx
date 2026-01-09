@@ -1,38 +1,61 @@
-import { Input, DefaultLayout } from "../../components";
+import { Input, DefaultLayout, Button } from "../../components";
 import { useFormStore } from "../../store/formStore";
+import { generateOtp } from "../../utils";
+
+import { Modal } from "../../components";
+import { useEffect, useState } from "react";
 
 export const Verification = () => {
   const { data, update } = useFormStore();
+  const [showOtpModal, setShowOtpModal] = useState(false);
 
-  const isComplete = !!(data.firstName && data.lastName && data.email);
+  useEffect(() => {
+    if (!data.isPhoneVerified && !data.generatedOtp && data.phone) {
+      const otp = generateOtp();
+      update("generatedOtp", otp);
+      setShowOtpModal(true);
+    }
+  }, [data.isPhoneVerified, data.generatedOtp, data.phone]);
+
+  const isOtpValid = data.otp.length === 6 && data.otp === data.generatedOtp;
+
+  useEffect(() => {
+    if (isOtpValid) {
+      update("isPhoneVerified", true);
+    }
+  }, [isOtpValid]);
+
+  const handleResendOtp = () => {
+    const newOtp = generateOtp();
+    update("generatedOtp", newOtp);
+    update("otp", "");
+    setShowOtpModal(true);
+  };
+
+  const handleClose = () => {
+    setShowOtpModal(false);
+  };
 
   return (
-    <DefaultLayout
-      title="Verification"
-      subtitle="Please provide your name, email address and phone number"
-      buttonDisabled={!isComplete}
-    >
-      <div className="flex flex-col gap-y-4">
+    <div>
+      <DefaultLayout title="Phone Verification" buttonDisabled={!isOtpValid}>
         <Input
-          label="First Name"
-          placeholder="Enter your first name"
-          value={data.firstName}
-          onChange={(e) => update("firstName", e.target.value)}
+          placeholder="Enter otp"
+          onChange={(e) => update("otp", e.target.value)}
         />
-        <Input
-          label="Last Name"
-          placeholder="Enter your last name"
-          value={data.lastName}
-          onChange={(e) => update("lastName", e.target.value)}
+        <div className="flex justify-end mt-1">
+          <Button text="Resend OTP" variant="link" onClick={handleResendOtp} />
+        </div>
+      </DefaultLayout>
+      {showOtpModal && (
+        <Modal
+          title="Your verification code"
+          content={data.generatedOtp}
+          type="alert"
+          buttonType="copy"
+          onClose={handleClose}
         />
-        <Input
-          label="Email Address"
-          placeholder="Enter your email address"
-          value={data.email}
-          type="email"
-          onChange={(e) => update("email", e.target.value)}
-        />
-      </div>
-    </DefaultLayout>
+      )}
+    </div>
   );
 };

@@ -1,4 +1,4 @@
-import { useIsScreen } from "../../hooks";
+import { useIsScreen, useStepNavigation } from "../../hooks";
 import { useStepStore } from "../../store";
 import { IoCheckmark } from "react-icons/io5";
 import { IoIosArrowBack } from "react-icons/io";
@@ -9,12 +9,13 @@ export const Stepper = () => {
   const isMobile = useIsScreen();
   const completedSteps = useStepStore((state) => state.completedSteps);
   const currentStep = useStepStore((state) => state.currentStep);
-  const prevStep = useStepStore((state) => state.prevStep);
   const totalSteps = useStepStore((state) => state.totalSteps);
+
+  const { handlePrevSteps } = useStepNavigation();
 
   return isMobile ? (
     <section className="flex justify-between items-center px-8 py-4 border-b border-base-100">
-      <IoIosArrowBack onClick={prevStep} className="text-3xl" />
+      <IoIosArrowBack onClick={handlePrevSteps} className="text-3xl" />
       <h1 className="font-semibold">Multi Step Form</h1>
       <div className="text-secondary-100 text-sm bg-base-100 size-14 flex justify-center items-center rounded-full border-5 border-primary-100">
         <span className="text-[18px] text-primary-100 font-bold">
@@ -37,7 +38,7 @@ export const Stepper = () => {
           const isActive = currentStep === details.step;
 
           return (
-            <div className="flex items-center gap-x-3">
+            <div className="flex items-center gap-x-3" key={details.step}>
               <div
                 className={clsx(
                   "border border-primary-100 text-sm size-10 flex justify-center items-center rounded-full",

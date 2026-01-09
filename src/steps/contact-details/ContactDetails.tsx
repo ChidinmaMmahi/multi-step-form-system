@@ -2,7 +2,7 @@ import { Input, DefaultLayout } from "../../components";
 import { useFormStore } from "../../store";
 
 export const ContactDetails = () => {
-  const { data, update } = useFormStore();
+  const { data, update, updatePhone } = useFormStore();
 
   const isComplete = !!(data.phone && data.address);
 
@@ -18,7 +18,7 @@ export const ContactDetails = () => {
           type="tel"
           placeholder="Enter your phone number"
           value={data.phone}
-          onChange={(e) => update("phone", e.target.value)}
+          onChange={(e) => updatePhone(e.target.value)}
         />
         <Input
           label="Address"
