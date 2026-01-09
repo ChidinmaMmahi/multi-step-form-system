@@ -1,5 +1,7 @@
 import { StepsContainer } from "./steps";
 import { Toaster } from "react-hot-toast";
+import Success from "./Success";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
@@ -10,7 +12,10 @@ function App() {
           duration: 1500,
         }}
       />
-      <StepsContainer />
+      <Routes>
+        <Route path="/" element={<StepsContainer />} />
+        <Route path="/success" element={<Success />} />
+      </Routes>
     </div>
   );
 }

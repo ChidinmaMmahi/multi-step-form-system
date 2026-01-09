@@ -18,8 +18,8 @@ export const DefaultLayout = ({
       className={clsx(
         "flex",
         !isMobile &&
-          "bg-base-100 dark:bg-d-base-100 py-20 sm:px-5 sm: space-x-5 lg:px-20 xl:px-28 justify-between lg:space-x-10 xl:space-x-20",
-        isMobile && "min-h-screen flex-col bg-base dark:bg-d-base"
+          "py-20 sm:px-5 sm: space-x-5 lg:px-20 xl:px-28 justify-between items-center lg:space-x-10 xl:space-x-20",
+        isMobile && "min-h-screen flex-col bg-white dark:bg-d-base"
       )}
     >
       <section className="sm:w-1/2">
@@ -31,9 +31,9 @@ export const DefaultLayout = ({
         </div>
         <section
           className={clsx(
-            "bg-base dark:bg-d-base",
-            !isMobile && "w-full rounded-lg shadow-lg p-4 lg:p-10",
-            isMobile && "flex-1 p-8 pt-0"
+            "bg-white/90 dark:bg-d-base/90",
+            !isMobile && "w-full rounded-lg shadow-2xl p-4 lg:p-10",
+            isMobile && "flex-1 p-8 pt-0 -mt-10"
           )}
         >
           <FormLayout

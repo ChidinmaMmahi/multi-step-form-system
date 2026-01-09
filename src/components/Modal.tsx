@@ -50,7 +50,7 @@ export const Modal = ({
     <div className="w-screen h-screen fixed inset-0 bg-black/70 backdrop-blur-xs">
       <section
         className={clsx(
-          "bg-base dark:bg-d-base absolute space-y-10",
+          "bg-white dark:bg-d-base absolute space-y-10",
           isMobile && "w-full rounded-t-lg bottom-0 p-5",
           !isMobile &&
             "left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 p-10 w-[500px] rounded-lg shadow-sm"
@@ -63,7 +63,7 @@ export const Modal = ({
         ) : (
           type === "success" && (
             <div className="bg-green-100 inline-flex p-3 rounded-full">
-              <LuBadgeCheck className="text-2xl text-green-700" />
+              <LuBadgeCheck className="text-2xl text-primary" />
             </div>
           )
         )}
